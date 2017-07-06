@@ -8,7 +8,7 @@ using SupportBank.Transactions;
 
 namespace SupportBank
 {
-    class SupportBank
+    public class SupportBank
     {
         private TransactionManager transactions;
         private AccountManager accounts;
@@ -27,6 +27,16 @@ namespace SupportBank
             {
                 reader.ParseNext();
             }
+        }
+
+        public void WriteAllAccounts()
+        {
+            SupportBankWriter.WriteAllAccounts(accounts);
+        }
+
+        public void WriteTransactionsForAccount(string accountName)
+        {
+            SupportBankWriter.WriteAllTransactionsForAccount(transactions, accountName);
         }
     }
 }

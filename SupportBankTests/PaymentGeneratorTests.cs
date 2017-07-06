@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Runtime.Remoting.Messaging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SupportBank;
@@ -55,6 +56,55 @@ namespace SupportBankTests
             }
 
             Assert.AreEqual<int>(2, transactionManager.GetCount());
+        }
+
+        [TestMethod]
+        public void ListOfAccountsCorrect()
+        {
+            string testPath = "C:/Work/Training/SupportBank/SupportBankTests/testCSV/testCSV.csv";
+            TransactionManager transactionManager = new TransactionManager();
+            AccountManager accountManager = new AccountManager();
+            CsvParser reader = new CsvParser(testPath, transactionManager, accountManager);
+
+            string line;
+            while (reader.HasNext())
+            {
+                reader.ParseNext();
+            }
+
+            List<Account> accounts = accountManager.GetAccounts();
+
+            Assert.AreEqual<int>(3, accounts.Count);
+        }
+
+        [TestMethod]
+        public void ListOfTransactionsCorrect()
+        {
+            string testPath = "C:/Work/Training/SupportBank/SupportBankTests/testCSV/testCSV.csv";
+            TransactionManager transactionManager = new TransactionManager();
+            AccountManager accountManager = new AccountManager();
+            CsvParser reader = new CsvParser(testPath, transactionManager, accountManager);
+
+            string line;
+            while (reader.HasNext())
+            {
+                reader.ParseNext();
+            }
+
+            string accountNameA = "Alpha A";
+            string accountNameB = "Beta B";
+            string accountNameO = "Omega O";
+            string accountNameZ = "Zeta Z";
+
+            List<Transaction> transactionsA = transactionManager.GetTransactionsWithAccount(accountNameA);
+            List<Transaction> transactionsB = transactionManager.GetTransactionsWithAccount(accountNameB);
+            List<Transaction> transactionsO = transactionManager.GetTransactionsWithAccount(accountNameO);
+            List<Transaction> transactionsZ = transactionManager.GetTransactionsWithAccount(accountNameZ);
+
+            Assert.AreEqual<int>(2, transactionsA.Count);
+            Assert.AreEqual<int>(0, transactionsB.Count);
+            Assert.AreEqual<int>(1, transactionsO.Count);
+            Assert.AreEqual<int>(1, transactionsZ.Count);
         }
 
         [TestMethod]

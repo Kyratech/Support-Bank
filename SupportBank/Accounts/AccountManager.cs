@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace SupportBank.Accounts
 {
@@ -27,6 +28,16 @@ namespace SupportBank.Accounts
         public int GetCount()
         {
             return accounts.Count;
+        }
+
+        public List<Account> GetAccounts()
+        {
+            List<Account> accountList = new List<Account>();
+            foreach (Account account in accounts.Values)
+            {
+                accountList.Add(account);
+            }
+            return accountList;
         }
     }
 }

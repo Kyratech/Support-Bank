@@ -1,4 +1,5 @@
 ﻿using System;
+using SupportBank.DataTypes;
 
 namespace SupportBank.Accounts
 {

@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace SupportBank
+namespace SupportBank.DataTypes
 {
     public class Money
     {
@@ -18,7 +14,7 @@ namespace SupportBank
         public Money(string value)
         {
             //Remove deciaml point
-            value.Replace(".", "");
+            value = value.Replace(".", "");
             amount = Int32.Parse(value);
         }
 
@@ -32,7 +28,7 @@ namespace SupportBank
             int pounds = amount / 100;
             int pence = amount % 100;
 
-            return "£" + pounds + pence.ToString("00");
+            return "£" + pounds.ToString("0") + "." + pence.ToString("00");
         }
 
         public static Money operator +(Money m1, Money m2)

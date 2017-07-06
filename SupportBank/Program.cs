@@ -1,4 +1,6 @@
-﻿namespace SupportBank
+﻿using System;
+
+namespace SupportBank
 {
     class Program
     {

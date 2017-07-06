@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace SupportBank
+namespace SupportBank.DataTypes
 {
     public class Date
     {
@@ -20,6 +16,11 @@ namespace SupportBank
             int year = Int32.Parse(dateData[2]);
 
             dateTime = new DateTime(year, month, day);
+        }
+
+        public override string ToString()
+        {
+            return dateTime.ToString("YYYY-MM-DD");
         }
     }
 }

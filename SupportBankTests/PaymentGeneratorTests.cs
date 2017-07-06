@@ -24,6 +24,18 @@ namespace SupportBankTests
             }
 
             Assert.AreEqual<int>(3, accountManager.GetCount());
+
+            string accountNameA = "Alpha A";
+            string accountNameO = "Omega O";
+            string accountNameZ = "Zeta Z";
+
+            Account accountA = accountManager.GetAccount(accountNameA);
+            Account accountO = accountManager.GetAccount(accountNameO);
+            Account accountZ = accountManager.GetAccount(accountNameZ);
+
+            StringAssert.Contains(accountA.GetName(), accountNameA);
+            StringAssert.Contains(accountO.GetName(), accountNameO);
+            StringAssert.Contains(accountZ.GetName(), accountNameZ);
         }
 
         [TestMethod]

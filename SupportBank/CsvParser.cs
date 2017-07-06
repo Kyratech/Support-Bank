@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization.Configuration;
 using SupportBank.Accounts;
+using SupportBank.DataTypes;
 using SupportBank.Transactions;
 
 namespace SupportBank

@@ -1,4 +1,6 @@
-﻿using SupportBank.Accounts;
+﻿using System.Text;
+using SupportBank.Accounts;
+using SupportBank.DataTypes;
 
 namespace SupportBank.Transactions
 {
@@ -25,6 +27,28 @@ namespace SupportBank.Transactions
         {
             sender.ApplyTransaction(new Money(-amount.GetAmount()));
             recipient.ApplyTransaction(amount);
+        }
+
+        public bool InvolvesAccount(string name)
+        {
+            return (sender.GetName().Equals(name) || recipient.GetName().Equals(name));
+        }
+
+        public override string ToString()
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.Append("[");
+            stringBuilder.Append(date.ToString());
+            stringBuilder.Append(", ");
+            stringBuilder.Append(sender.GetName());
+            stringBuilder.Append("->");
+            stringBuilder.Append(recipient.GetName());
+            stringBuilder.Append(", ");
+            stringBuilder.Append(narrative);
+            stringBuilder.Append(", ");
+            stringBuilder.Append(amount.ToString());
+            stringBuilder.Append("]");
+            return stringBuilder.ToString();
         }
     }
 }

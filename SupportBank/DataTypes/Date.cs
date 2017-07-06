@@ -20,7 +20,7 @@ namespace SupportBank.DataTypes
 
         public override string ToString()
         {
-            return dateTime.ToString("YYYY-MM-DD");
+            return dateTime.ToString("yyyy-MM-dd");
         }
     }
 }

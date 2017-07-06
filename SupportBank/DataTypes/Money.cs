@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Text;
 
 namespace SupportBank.DataTypes
 {
     public class Money
     {
+        public const string NumberFormatMessage = "The string passed to create a money is not a valid number: ";
+
         private int amount;
 
         public Money(int value)
@@ -13,9 +16,49 @@ namespace SupportBank.DataTypes
 
         public Money(string value)
         {
-            //Remove deciaml point
-            value = value.Replace(".", "");
-            amount = Int32.Parse(value);
+            char[] separators = {'.'};
+            string[] splitValue = value.Split(separators);
+
+            if (splitValue.Length == 2)
+            {
+                amount = ParsePoundsPence(splitValue[0], splitValue[1]);
+            }
+            else if (splitValue.Length == 1)
+            {
+                amount = ParsePounds(splitValue[0]);
+            }
+            else
+            {
+                throw new ArgumentException(NumberFormatMessage + value);
+            }
+        }
+
+        private int ParsePoundsPence(string poundsString, string penceString)
+        {
+            int pounds = 0;
+            int pence = 0;
+
+            if (poundsString.Length > 0)
+                pounds = ParsePounds(poundsString);
+
+            pence = ParsePence(penceString);
+
+            return (pounds + pence);
+        }
+
+        private int ParsePounds(string poundsString)
+        {
+            int pounds = Int32.Parse(poundsString);
+            return (pounds * 100);
+        }
+
+        private int ParsePence(string penceString)
+        {
+            int pence = Int32.Parse(penceString);
+            //If there is only one pence number, it's actually a multiple of 10
+            if (penceString.Length == 1)
+                pence *= 10;
+            return pence;
         }
 
         public int GetAmount()
@@ -25,10 +68,21 @@ namespace SupportBank.DataTypes
 
         public override string ToString()
         {
-            int pounds = amount / 100;
-            int pence = amount % 100;
+            int absAmount = Math.Abs(amount);
 
-            return "£" + pounds.ToString("0") + "." + pence.ToString("00");
+            int pounds = absAmount / 100;
+            int pence = absAmount % 100;
+
+            StringBuilder stringBuilder = new StringBuilder();
+
+            if (amount < 0)
+            {
+                stringBuilder.Append("-");
+            }
+
+            stringBuilder.Append("£" + pounds.ToString("0") + "." + pence.ToString("00"));
+
+            return stringBuilder.ToString();
         }
 
         public static Money operator +(Money m1, Money m2)

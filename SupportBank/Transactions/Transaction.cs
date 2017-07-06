@@ -38,7 +38,7 @@ namespace SupportBank.Transactions
         {
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.Append("[");
-            stringBuilder.Append(date.ToString());
+            stringBuilder.Append(date);
             stringBuilder.Append(", ");
             stringBuilder.Append(sender.GetName());
             stringBuilder.Append("->");
@@ -46,7 +46,7 @@ namespace SupportBank.Transactions
             stringBuilder.Append(", ");
             stringBuilder.Append(narrative);
             stringBuilder.Append(", ");
-            stringBuilder.Append(amount.ToString());
+            stringBuilder.Append(amount);
             stringBuilder.Append("]");
             return stringBuilder.ToString();
         }

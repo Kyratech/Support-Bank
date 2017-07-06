@@ -38,5 +38,10 @@ namespace SupportBank.Accounts
         {
             return name;
         }
+
+        public override string ToString()
+        {
+            return "[" + name + ", Balance: " + balance + "]";
+        }
     }
 }

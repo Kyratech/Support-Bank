@@ -20,10 +20,30 @@ namespace SupportBank
 
         public static void WriteAllTransactionsForAccount(TransactionManager transactions, string accountName)
         {
-            foreach (Transaction transaction in transactions.GetTransactionsWithAccount(accountName))
+            List<Transaction> transactionsForAccount = transactions.GetTransactionsWithAccount(accountName);
+
+            if (transactionsForAccount.Count > 0)
+            {
+                WriteTransactionList(transactionsForAccount);
+            }
+            else
+            {
+                Console.WriteLine("There are no transactions associated with that user.");
+            }
+            
+        }
+
+        private static void WriteTransactionList(List<Transaction> transactionList)
+        {
+            foreach (Transaction transaction in transactionList)
             {
                 Console.WriteLine(transaction);
             }
+        }
+
+        public static void WriteInvalidAccountMessage(string invalidName)
+        {
+            Console.WriteLine("'" + invalidName + "' does not have an active account.");
         }
     }
 }

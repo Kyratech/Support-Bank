@@ -51,6 +51,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SupportBank.cs" />
+    <Compile Include="SupportBankConsoleParser.cs" />
     <Compile Include="SupportBankWriter.cs" />
     <Compile Include="Transactions\Transaction.cs" />
     <Compile Include="Transactions\TransactionManager.cs" />

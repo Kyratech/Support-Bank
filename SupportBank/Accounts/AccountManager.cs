@@ -30,6 +30,11 @@ namespace SupportBank.Accounts
             return accounts.Count;
         }
 
+        public bool AccountExists(string name)
+        {
+            return accounts.ContainsKey(name);
+        }
+
         public List<Account> GetAccounts()
         {
             List<Account> accountList = new List<Account>();

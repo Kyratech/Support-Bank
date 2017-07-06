@@ -36,7 +36,14 @@ namespace SupportBank
 
         public void WriteTransactionsForAccount(string accountName)
         {
-            SupportBankWriter.WriteAllTransactionsForAccount(transactions, accountName);
+            if (accounts.AccountExists(accountName))
+            {
+                SupportBankWriter.WriteAllTransactionsForAccount(transactions, accountName);
+            }
+            else
+            {
+                SupportBankWriter.WriteInvalidAccountMessage(accountName);
+            }
         }
     }
 }

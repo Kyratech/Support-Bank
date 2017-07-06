@@ -10,9 +10,8 @@ namespace SupportBank
             SupportBank bank = new SupportBank();
             bank.UpdateRecords(transactionPath);
 
-            bank.WriteAllAccounts();
-            Console.WriteLine();
-            bank.WriteTransactionsForAccount("Rob S");
+            SupportBankConsoleParser consoleParser = new SupportBankConsoleParser();
+            consoleParser.ProcessInput(bank);
         }
     }
 }

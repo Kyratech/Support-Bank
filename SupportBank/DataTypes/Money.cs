@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Text;
+using NLog;
 
 namespace SupportBank.DataTypes
 {
     public class Money
     {
+        private static readonly ILogger logger = LogManager.GetCurrentClassLogger();
+
         public const string NumberFormatMessage = "The string passed to create a money is not a valid number: ";
 
         private int amount;
@@ -19,18 +22,27 @@ namespace SupportBank.DataTypes
             char[] separators = {'.'};
             string[] splitValue = value.Split(separators);
 
-            if (splitValue.Length == 2)
+            try
             {
-                amount = ParsePoundsPence(splitValue[0], splitValue[1]);
+                if (splitValue.Length == 2)
+                {
+                    amount = ParsePoundsPence(splitValue[0], splitValue[1]);
+                }
+                else if (splitValue.Length == 1)
+                {
+                    amount = ParsePounds(splitValue[0]);
+                }
+                else
+                {
+                    throw new ArgumentException(NumberFormatMessage + value);
+                }
             }
-            else if (splitValue.Length == 1)
+            catch (Exception e)
             {
-                amount = ParsePounds(splitValue[0]);
+                logger.Error("The transaction amount '" + value + "' is not a valid monetary format: 'xx.xx'");
+                throw e;
             }
-            else
-            {
-                throw new ArgumentException(NumberFormatMessage + value);
-            }
+            
         }
 
         private int ParsePoundsPence(string poundsString, string penceString)
@@ -41,7 +53,8 @@ namespace SupportBank.DataTypes
             if (poundsString.Length > 0)
                 pounds = ParsePounds(poundsString);
 
-            pence = ParsePence(penceString);
+            if (penceString.Length > 0)
+                pence = ParsePence(penceString);
 
             return (pounds + pence);
         }

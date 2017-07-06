@@ -152,6 +152,12 @@ namespace SupportBankTests
             thirteen[0] = new Money("0.13");
             thirteen[1] = new Money(".13");
 
+            Money[] hundred = new Money[3];
+            hundred[0] = new Money("1.00");
+            hundred[1] = new Money("1.");
+            hundred[2] = new Money("1");
+
+
             Money hundredFour = new Money("1.04");
 
             Money[] hundredTen = new Money[2];
@@ -176,6 +182,12 @@ namespace SupportBankTests
             {
                 Assert.AreEqual(13, money.GetAmount());
                 StringAssert.Contains(money.ToString(), "£0.13");
+            }
+
+            foreach (Money money in hundred)
+            {
+                Assert.AreEqual(100, money.GetAmount());
+                StringAssert.Contains(money.ToString(), "£1.00");
             }
 
             Assert.AreEqual(104, hundredFour.GetAmount());

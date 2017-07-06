@@ -18,7 +18,7 @@ namespace SupportBank
             string transactions2015 = "C:/Work/Training/SupportBank/Transactions/DodgyTransactions2015.csv";
             SupportBank bank = new SupportBank();
             bank.UpdateRecords(transactions2014);
-            //bank.UpdateRecords(transactions2015);
+            bank.UpdateRecords(transactions2015);
 
             SupportBankConsoleParser consoleParser = new SupportBankConsoleParser();
             consoleParser.ProcessInput(bank);

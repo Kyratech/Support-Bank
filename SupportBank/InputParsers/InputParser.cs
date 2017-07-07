@@ -33,6 +33,23 @@ namespace SupportBank.InputParsers
             logger.Info("Opened file '" + path + "' to read transactions.");
         }
 
+        public static InputParser ChooseParser(string recordFilepath, TransactionManager transactions, AccountManager accounts)
+        {
+            if (recordFilepath.EndsWith(".csv"))
+            {
+                return new CsvParser(recordFilepath, transactions, accounts);
+            }
+            else if (recordFilepath.EndsWith(".json"))
+            {
+                return new JsonParser(recordFilepath, transactions, accounts);
+            }
+            else
+            {
+                logger.Error("Attempted to read unsupported file: '" + recordFilepath + "'.");
+                throw new ArgumentException("The file at '" + recordFilepath + "' is not a supported type (.csv, .json)");
+            }
+        }
+
         public abstract void ParseFile();
 
         protected void AddAnyNewAccounts(string sender, string recipient)
@@ -64,7 +81,7 @@ namespace SupportBank.InputParsers
         {
             if (hasNotWrittenErrorMessage)
             {
-                Console.WriteLine("There was some bad data in csv file: " + path);
+                Console.WriteLine("There was some bad data in file: " + path);
                 Console.WriteLine("Please refer to the system logs at: " + Program.LogDirectory);
                 hasNotWrittenErrorMessage = false;
             }

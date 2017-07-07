@@ -15,9 +15,11 @@ namespace SupportBank
             Program.SetupLogger();
             logger.Info("SupportBank program started");
 
+            string transactions2013 = "C:/Work/Training/SupportBank/Transactions/Transactions2013.json";
             string transactions2014 = "C:/Work/Training/SupportBank/Transactions/Transactions2014.csv";
             string transactions2015 = "C:/Work/Training/SupportBank/Transactions/DodgyTransactions2015.csv";
             SupportBank bank = new SupportBank();
+            bank.UpdateRecords(transactions2013);
             bank.UpdateRecords(transactions2014);
             bank.UpdateRecords(transactions2015);
 

@@ -22,7 +22,7 @@ namespace SupportBank
 
         public void UpdateRecords(string recordFilepath)
         {
-            CsvParser reader = new CsvParser(recordFilepath, transactions, accounts);
+            InputParser reader = InputParser.ChooseParser(recordFilepath, transactions, accounts);
 
             reader.ParseFile();
         }

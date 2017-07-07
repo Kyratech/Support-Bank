@@ -30,7 +30,6 @@ namespace SupportBank
             {
                 Console.WriteLine("There are no transactions associated with that user.");
             }
-            
         }
 
         private static void WriteTransactionList(List<Transaction> transactionList)

@@ -22,7 +22,7 @@ namespace SupportBank.InputParsers
 
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
-
+            reader.DateParseHandling = DateParseHandling.None;
             JObject jObject = JObject.Load(reader);
 
             string[] inputStrings = new string[5];

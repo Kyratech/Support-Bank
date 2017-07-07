@@ -30,11 +30,15 @@ namespace SupportBank.InputParsers
 
                 for(int i = 0; i < allTransactions.Count; i++)
                 {
-                    TransactionStrings data = allTransactions[i];
-                    AddAnyNewAccounts(data.GetSender(), data.GetRecipient());
-                    AddNewTransaction(data, i + 1);
+                    ParseEntry(allTransactions[i], i + 1);
                 }
             }
+        }
+
+        private void ParseEntry(TransactionStrings data, int entryNumber)
+        {
+            AddAnyNewAccounts(data.GetSender(), data.GetRecipient());
+            AddNewTransaction(data, entryNumber);
         }
     }
 }

@@ -37,7 +37,7 @@ namespace SupportBank
             //Discard the first line - it's just the column names
             csvFile.ReadLine();
             lineCounter = 1;
-            ReadAndCloseAtEnd();
+            ReadLineAndCloseIfFinished();
 
             transactions = bankTransactions;
             accounts = bankAccounts;
@@ -51,24 +51,20 @@ namespace SupportBank
         {
             while (hasNext)
             {
-                ParseNext();
-            }
-        }
-
-        private void ParseNext()
-        {
-            if (hasNext)
-            {
                 ParseLine(currentLine);
-                ReadAndCloseAtEnd();
-            }
-            else
-            {
-                throw new Exception("Reached end of file");
+                ReadLineAndCloseIfFinished();
             }
         }
 
-        private void ReadAndCloseAtEnd()
+        private void ParseLine(string line)
+        {
+            TransactionStrings data = new TransactionStrings(splitCsv(line));
+
+            AddAnyNewAccounts(data.GetSender(), data.GetRecipient());
+            AddNewTransaction(data);
+        }
+
+        private void ReadLineAndCloseIfFinished()
         {
             currentLine = csvFile.ReadLine();
 
@@ -83,14 +79,6 @@ namespace SupportBank
                 hasNext = true;
                 lineCounter++;
             }
-        }
-
-        private void ParseLine(string line)
-        {
-            TransactionStrings data = new TransactionStrings(splitCsv(line));
-
-            AddAnyNewAccounts(data.GetSender(), data.GetRecipient());
-            AddNewTransaction(data);
         }
 
         private string[] splitCsv(string line)

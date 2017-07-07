@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -79,7 +80,21 @@ namespace SupportBank
         {
             string path = input.Substring(ImportCommand.Length);
 
-
+            try
+            {
+                bank.UpdateRecords(path);
+                Console.WriteLine("Records updated successfully!");
+            }
+            catch (ArgumentException ae)
+            {
+                Console.WriteLine(ae.Message);
+                logger.Warn("User attempted to load invalid file: '" + path + "'.");
+            }
+            catch (FileNotFoundException)
+            {
+                Console.WriteLine("Cannot find a valid file at: '" + path + "'.");
+                logger.Warn("User attempted to load invalid file: '" + path + "'.");
+            }
         }
 
         private void PrintHelpMessage()

@@ -45,7 +45,6 @@ namespace SupportBank.InputParsers
             }
             else
             {
-                logger.Error("Attempted to read unsupported file: '" + recordFilepath + "'.");
                 throw new ArgumentException("The file at '" + recordFilepath + "' is not a supported type (.csv, .json)");
             }
         }

@@ -19,12 +19,23 @@ namespace SupportBankTests
             string testPath = "C:/Work/Training/SupportBank/SupportBankTests/testFiles/testCSV.csv";
             TransactionManager transactionManager = new TransactionManager();
             AccountManager accountManager = new AccountManager();
-            CsvParser reader = new CsvParser(testPath, transactionManager, accountManager);
+            InputParser reader = new CsvParser(testPath, transactionManager, accountManager);
 
             ParseCorrectAccounts(reader, accountManager);
         }
 
-        private void ParseCorrectAccounts(CsvParser reader, AccountManager accountManager)
+        [TestMethod]
+        public void ParseCorrectAccountJson()
+        {
+            string testPath = "C:/Work/Training/SupportBank/SupportBankTests/testFiles/testJSON.json";
+            TransactionManager transactionManager = new TransactionManager();
+            AccountManager accountManager = new AccountManager();
+            InputParser reader = new JsonParser(testPath, transactionManager, accountManager);
+
+            ParseCorrectAccounts(reader, accountManager);
+        }
+
+        private void ParseCorrectAccounts(InputParser reader, AccountManager accountManager)
         {
             reader.ParseFile();
 
@@ -49,12 +60,23 @@ namespace SupportBankTests
             string testPath = "C:/Work/Training/SupportBank/SupportBankTests/testFiles/testCSV.csv";
             TransactionManager transactionManager = new TransactionManager();
             AccountManager accountManager = new AccountManager();
-            CsvParser reader = new CsvParser(testPath, transactionManager, accountManager);
+            InputParser reader = new CsvParser(testPath, transactionManager, accountManager);
 
             ParseCorrectTransactions(reader, transactionManager);
         }
 
-        private void ParseCorrectTransactions(CsvParser reader, TransactionManager transactionManager)
+        [TestMethod]
+        public void ParseCorrectTransactionsJson()
+        {
+            string testPath = "C:/Work/Training/SupportBank/SupportBankTests/testFiles/testJSON.json";
+            TransactionManager transactionManager = new TransactionManager();
+            AccountManager accountManager = new AccountManager();
+            InputParser reader = new JsonParser(testPath, transactionManager, accountManager);
+
+            ParseCorrectTransactions(reader, transactionManager);
+        }
+
+        private void ParseCorrectTransactions(InputParser reader, TransactionManager transactionManager)
         {
             reader.ParseFile();
 
@@ -80,7 +102,18 @@ namespace SupportBankTests
             ListOfAccountsCorrect(reader, accountManager);
         }
 
-        private void ListOfAccountsCorrect(CsvParser reader, AccountManager accountManager)
+        [TestMethod]
+        public void ListOfAccountsCorrectJson()
+        {
+            string testPath = "C:/Work/Training/SupportBank/SupportBankTests/testFiles/testJSON.json";
+            TransactionManager transactionManager = new TransactionManager();
+            AccountManager accountManager = new AccountManager();
+            InputParser reader = new JsonParser(testPath, transactionManager, accountManager);
+
+            ListOfAccountsCorrect(reader, accountManager);
+        }
+
+        private void ListOfAccountsCorrect(InputParser reader, AccountManager accountManager)
         {
             reader.ParseFile();
 
@@ -100,7 +133,18 @@ namespace SupportBankTests
             ListOfTransactionsCorrect(reader, transactionManager);
         }
 
-        private void ListOfTransactionsCorrect(CsvParser reader, TransactionManager transactionManager)
+        [TestMethod]
+        public void ListOfTransactionsCorrectJson()
+        {
+            string testPath = "C:/Work/Training/SupportBank/SupportBankTests/testFiles/testJSON.json";
+            TransactionManager transactionManager = new TransactionManager();
+            AccountManager accountManager = new AccountManager();
+            InputParser reader = new JsonParser(testPath, transactionManager, accountManager);
+
+            ListOfTransactionsCorrect(reader, transactionManager);
+        }
+
+        private void ListOfTransactionsCorrect(InputParser reader, TransactionManager transactionManager)
         {
             reader.ParseFile();
 

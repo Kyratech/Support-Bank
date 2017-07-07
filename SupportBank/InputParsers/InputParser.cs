@@ -83,5 +83,10 @@ namespace SupportBank.InputParsers
 
             logger.Error(errorString.ToString);
         }
+
+        protected string GetPath()
+        {
+            return path;
+        }
     }
 }

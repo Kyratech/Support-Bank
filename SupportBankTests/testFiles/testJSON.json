@@ -1,13 +1,13 @@
 [
   {
-    "Date": "2000-01-01T00:00:00",
+    "Date": "01/01/2000",
     "FromAccount": "Alpha A",
     "ToAccount": "Zeta Z",
     "Narrative": "Food",
     "Amount": 10.33
   },
   {
-    "Date": "2000-01-02T00:00:00",
+    "Date": "02/01/2000",
     "FromAccount": "Alpha A",
     "ToAccount": "Omega O",
     "Narrative": "Wage",

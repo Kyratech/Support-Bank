@@ -13,13 +13,18 @@ namespace SupportBankTests
     public class PaymentGeneratorTests
     {
         [TestMethod]
-        public void GenerateCorrectAccounts()
+        public void ParseCorrectAccountsCsv()
         {
-            string testPath = "C:/Work/Training/SupportBank/SupportBankTests/testCSV/testCSV.csv";
+            string testPath = "C:/Work/Training/SupportBank/SupportBankTests/testFiles/testCSV.csv";
             TransactionManager transactionManager = new TransactionManager();
             AccountManager accountManager = new AccountManager();
             CsvParser reader = new CsvParser(testPath, transactionManager, accountManager);
 
+            ParseCorrectAccounts(reader, accountManager);
+        }
+
+        private void ParseCorrectAccounts(CsvParser reader, AccountManager accountManager)
+        {
             while (reader.HasNext())
             {
                 reader.ParseNext();
@@ -41,29 +46,47 @@ namespace SupportBankTests
         }
 
         [TestMethod]
-        public void GenerateCorrectTransactions()
+        public void ParseCorrectTransactionsCsv()
         {
-            string testPath = "C:/Work/Training/SupportBank/SupportBankTests/testCSV/testCSV.csv";
+            string testPath = "C:/Work/Training/SupportBank/SupportBankTests/testFiles/testCSV.csv";
             TransactionManager transactionManager = new TransactionManager();
             AccountManager accountManager = new AccountManager();
             CsvParser reader = new CsvParser(testPath, transactionManager, accountManager);
 
+            ParseCorrectTransactions(reader, transactionManager);
+        }
+
+        private void ParseCorrectTransactions(CsvParser reader, TransactionManager transactionManager)
+        {
             while (reader.HasNext())
             {
                 reader.ParseNext();
             }
 
             Assert.AreEqual<int>(2, transactionManager.GetCount());
+
+            List<Transaction> transactionsA = transactionManager.GetTransactionsWithAccount("Alpha A");
+            List<Transaction> transactionsO = transactionManager.GetTransactionsWithAccount("Omega O");
+            List<Transaction> transactionsZ = transactionManager.GetTransactionsWithAccount("Zeta Z");
+
+            Assert.AreEqual(2, transactionsA.Count);
+            Assert.AreEqual(1, transactionsO.Count);
+            Assert.AreEqual(1, transactionsZ.Count);
         }
 
         [TestMethod]
-        public void ListOfAccountsCorrect()
+        public void ListOfAccountsCorrectCsv()
         {
-            string testPath = "C:/Work/Training/SupportBank/SupportBankTests/testCSV/testCSV.csv";
+            string testPath = "C:/Work/Training/SupportBank/SupportBankTests/testFiles/testCSV.csv";
             TransactionManager transactionManager = new TransactionManager();
             AccountManager accountManager = new AccountManager();
             CsvParser reader = new CsvParser(testPath, transactionManager, accountManager);
 
+            ListOfAccountsCorrect(reader, accountManager);
+        }
+
+        private void ListOfAccountsCorrect(CsvParser reader, AccountManager accountManager)
+        {
             while (reader.HasNext())
             {
                 reader.ParseNext();
@@ -75,13 +98,18 @@ namespace SupportBankTests
         }
 
         [TestMethod]
-        public void ListOfTransactionsCorrect()
+        public void ListOfTransactionsCorrectCsv()
         {
-            string testPath = "C:/Work/Training/SupportBank/SupportBankTests/testCSV/testCSV.csv";
+            string testPath = "C:/Work/Training/SupportBank/SupportBankTests/testFiles/testCSV.csv";
             TransactionManager transactionManager = new TransactionManager();
             AccountManager accountManager = new AccountManager();
             CsvParser reader = new CsvParser(testPath, transactionManager, accountManager);
 
+            ListOfTransactionsCorrect(reader, transactionManager);
+        }
+
+        private void ListOfTransactionsCorrect(CsvParser reader, TransactionManager transactionManager)
+        {
             while (reader.HasNext())
             {
                 reader.ParseNext();

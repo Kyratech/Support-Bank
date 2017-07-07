@@ -47,12 +47,15 @@ namespace SupportBank
             logger.Info("Opened csv file '" + path + "' to read transactions.");
         }
 
-        public bool HasNext()
+        public void ParseFile()
         {
-            return hasNext;
+            while (hasNext)
+            {
+                ParseNext();
+            }
         }
 
-        public void ParseNext()
+        private void ParseNext()
         {
             if (hasNext)
             {

@@ -25,10 +25,7 @@ namespace SupportBankTests
 
         private void ParseCorrectAccounts(CsvParser reader, AccountManager accountManager)
         {
-            while (reader.HasNext())
-            {
-                reader.ParseNext();
-            }
+            reader.ParseFile();
 
             Assert.AreEqual<int>(3, accountManager.GetCount());
 
@@ -58,10 +55,7 @@ namespace SupportBankTests
 
         private void ParseCorrectTransactions(CsvParser reader, TransactionManager transactionManager)
         {
-            while (reader.HasNext())
-            {
-                reader.ParseNext();
-            }
+            reader.ParseFile();
 
             Assert.AreEqual<int>(2, transactionManager.GetCount());
 
@@ -87,10 +81,7 @@ namespace SupportBankTests
 
         private void ListOfAccountsCorrect(CsvParser reader, AccountManager accountManager)
         {
-            while (reader.HasNext())
-            {
-                reader.ParseNext();
-            }
+            reader.ParseFile();
 
             List<Account> accounts = accountManager.GetAccounts();
 
@@ -110,10 +101,7 @@ namespace SupportBankTests
 
         private void ListOfTransactionsCorrect(CsvParser reader, TransactionManager transactionManager)
         {
-            while (reader.HasNext())
-            {
-                reader.ParseNext();
-            }
+            reader.ParseFile();
 
             string accountNameA = "Alpha A";
             string accountNameB = "Beta B";

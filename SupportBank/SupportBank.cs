@@ -10,8 +10,8 @@ namespace SupportBank
 {
     public class SupportBank
     {
-        private TransactionManager transactions;
-        private AccountManager accounts;
+        private readonly TransactionManager transactions;
+        private readonly AccountManager accounts;
 
         public SupportBank()
         {
@@ -23,10 +23,7 @@ namespace SupportBank
         {
             CsvParser reader = new CsvParser(recordFilepath, transactions, accounts);
 
-            while (reader.HasNext())
-            {
-                reader.ParseNext();
-            }
+            reader.ParseFile();
         }
 
         public void WriteAllAccounts()

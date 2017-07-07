@@ -13,6 +13,9 @@ namespace SupportBank
 
         private string[] quitCommands = {"q", "quit", "exit"};
 
+        private const string ListCommand = "List ";
+        private const string ImportCommand = "Import File ";
+
         public void ProcessInput(SupportBank bank)
         {
             Console.WriteLine("Please enter your query below:");
@@ -21,9 +24,13 @@ namespace SupportBank
             while (ShouldContinueProcessingInput(input))
             {
                 input = input.Trim();
-                if (input.StartsWith("List "))
+                if (input.StartsWith(ListCommand))
                 {
-                    ParseCommand(input, bank);
+                    ParseListCommand(input, bank);
+                }
+                else if (input.StartsWith(ImportCommand))
+                {
+                    ParseImport(input, bank);
                 }
                 else
                 {
@@ -52,10 +59,9 @@ namespace SupportBank
             return false;
         }
 
-        private void ParseCommand(string input, SupportBank bank)
+        private void ParseListCommand(string input, SupportBank bank)
         {
-            //Get the rest of input (after 'Last ') separately
-            string query = input.Substring(5);
+            string query = input.Substring(ListCommand.Length);
 
             if (query.Equals("All"))
             {
@@ -67,6 +73,13 @@ namespace SupportBank
                 bank.WriteTransactionsForAccount(query);
                 logger.Info("User has requested list of transactions for account: " + query);
             }
+        }
+
+        private void ParseImport(string input, SupportBank bank)
+        {
+            string path = input.Substring(ImportCommand.Length);
+
+
         }
 
         private void PrintHelpMessage()

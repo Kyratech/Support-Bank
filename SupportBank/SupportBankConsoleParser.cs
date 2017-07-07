@@ -3,19 +3,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using NLog;
 
 namespace SupportBank
 {
     class SupportBankConsoleParser
     {
+        private static readonly ILogger logger = LogManager.GetCurrentClassLogger();
+
         private string[] quitCommands = {"q", "quit", "exit"};
 
         public void ProcessInput(SupportBank bank)
         {
+            Console.WriteLine("Please enter your query below:");
             string input;
             input = Console.ReadLine();
-            while (ContinueProcessingInput(input))
+            while (ShouldContinueProcessingInput(input))
             {
+                input = input.Trim();
                 if (input.StartsWith("List "))
                 {
                     ParseCommand(input, bank);
@@ -29,7 +34,7 @@ namespace SupportBank
             }
         }
 
-        private bool ContinueProcessingInput(string input)
+        private bool ShouldContinueProcessingInput(string input)
         {
             if (input != null)
             {
@@ -55,10 +60,12 @@ namespace SupportBank
             if (query.Equals("All"))
             {
                 bank.WriteAllAccounts();
+                logger.Info("User has requested list of all Accounts.");
             }
             else
             {
                 bank.WriteTransactionsForAccount(query);
+                logger.Info("User has requested list of transactions for account: " + query);
             }
         }
 

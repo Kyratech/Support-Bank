@@ -7,6 +7,7 @@ namespace SupportBank
 {
     class Program
     {
+        public const string LogDirectory = @"C:/Work/Logs/SupportBank.log";
         private static readonly ILogger logger = LogManager.GetCurrentClassLogger();
 
         static void Main(string[] args)
@@ -29,7 +30,7 @@ namespace SupportBank
         private static void SetupLogger()
         {
             var config = new LoggingConfiguration();
-            var target = new FileTarget { FileName = @"C:\Work\Logs\SupportBank.log", Layout = @"${longdate} ${level} - ${logger}: ${message}" };
+            var target = new FileTarget { FileName = LogDirectory, Layout = @"${longdate} ${level} - ${logger}: ${message}" };
             config.AddTarget("File Logger", target);
             config.LoggingRules.Add(new LoggingRule("*", LogLevel.Debug, target));
             LogManager.Configuration = config;

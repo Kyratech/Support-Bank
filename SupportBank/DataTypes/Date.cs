@@ -22,10 +22,9 @@ namespace SupportBank.DataTypes
 
                 dateTime = new DateTime(year, month, day);
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                logger.Error("The transaction date '" + date + "' is not in the correct format: 'dd/mm/yyyy'.");
-                throw e;
+                throw new ArgumentException("The transaction date '" + date + "' is not in the correct date format: 'dd/mm/yyyy'.");
             }
         }
 

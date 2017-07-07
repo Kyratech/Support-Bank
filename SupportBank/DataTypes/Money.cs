@@ -6,11 +6,7 @@ namespace SupportBank.DataTypes
 {
     public class Money
     {
-        private static readonly ILogger logger = LogManager.GetCurrentClassLogger();
-
-        public const string NumberFormatMessage = "The string passed to create a money is not a valid number: ";
-
-        private int amount;
+        private readonly int amount;
 
         public Money(int value)
         {
@@ -34,15 +30,13 @@ namespace SupportBank.DataTypes
                 }
                 else
                 {
-                    throw new ArgumentException(NumberFormatMessage + value);
+                    throw new Exception();
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                logger.Error("The transaction amount '" + value + "' is not a valid monetary format: 'xx.xx'");
-                throw e;
-            }
-            
+                throw new ArgumentException("The transaction amount '" + value + "' is not a valid monetary format: 'xx.xx'.");
+            }  
         }
 
         private int ParsePoundsPence(string poundsString, string penceString)

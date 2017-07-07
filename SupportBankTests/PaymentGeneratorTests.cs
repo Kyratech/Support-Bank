@@ -20,7 +20,6 @@ namespace SupportBankTests
             AccountManager accountManager = new AccountManager();
             CsvParser reader = new CsvParser(testPath, transactionManager, accountManager);
 
-            string line;
             while (reader.HasNext())
             {
                 reader.ParseNext();
@@ -49,7 +48,6 @@ namespace SupportBankTests
             AccountManager accountManager = new AccountManager();
             CsvParser reader = new CsvParser(testPath, transactionManager, accountManager);
 
-            string line;
             while (reader.HasNext())
             {
                 reader.ParseNext();
@@ -66,7 +64,6 @@ namespace SupportBankTests
             AccountManager accountManager = new AccountManager();
             CsvParser reader = new CsvParser(testPath, transactionManager, accountManager);
 
-            string line;
             while (reader.HasNext())
             {
                 reader.ParseNext();
@@ -85,7 +82,6 @@ namespace SupportBankTests
             AccountManager accountManager = new AccountManager();
             CsvParser reader = new CsvParser(testPath, transactionManager, accountManager);
 
-            string line;
             while (reader.HasNext())
             {
                 reader.ParseNext();

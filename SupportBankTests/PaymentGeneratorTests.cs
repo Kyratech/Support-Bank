@@ -259,5 +259,20 @@ namespace SupportBankTests
             Assert.AreEqual(113, hundredThirteen.GetAmount());
             StringAssert.Contains(hundredThirteen.ToString(), "£1.13");
         }
+
+        [TestMethod]
+        public void DateParsingTest()
+        {
+            Date englishSlash = new Date("30/01/2000");
+            Date englishDash = new Date("30-01-2000");
+
+            Date international = new Date("2000-01-30");
+            Date internationalWithTime = new Date("2000-01-30T00:00:00");
+
+            StringAssert.Contains(englishSlash.ToString(), "2000-01-30");
+            StringAssert.Contains(englishDash.ToString(), "2000-01-30");
+            StringAssert.Contains(international.ToString(), "2000-01-30");
+            StringAssert.Contains(internationalWithTime.ToString(), "2000-01-30");
+        }
     }
 }
